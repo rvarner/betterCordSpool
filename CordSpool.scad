@@ -34,7 +34,10 @@ module plugBox() {
 }
 
 module plugBoxRound() {
-	translate(v=[0,26.5,0]) roundedRect([plugWidth,plugDepth,plugHeight],roundRadius,center=true,$fn=40);
+	union() {
+		translate(v=[0,26.5,0]) roundedRect([plugWidth-roundRadius,plugDepth-roundRadius,plugHeight],roundRadius,center=true,$fn=40);
+		translate(v=[0,18.5,plugHeight/2]) cube([plugWidth,roundRadius+2,plugHeight],center=true);
+	}
 }
 
 module plugBarrel() {
@@ -50,6 +53,7 @@ union() {
 	}
 	 bump();
 }
+
 
 //translate(v=[0,20,plugHeight/2 +3]) cube([plugWidth,3,plugHeight],center=true);
 
