@@ -33,6 +33,10 @@ module plugBox() {
 	translate(v=[0,26.5,plugHeight/2]) cube([plugWidth,plugDepth,plugHeight],center=true);
 }
 
+module plugBoxRound() {
+	translate(v=[0,26.5,0]) roundedRect([plugWidth,plugDepth,plugHeight],roundRadius,center=true,$fn=40);
+}
+
 module plugBarrel() {
 	translate(v=[0,21.7 + groundToBox,(barrelDepth/2) + (plugHeight - barrelDepth) + 0.1]) 
 		cube([barrelWidth,barrelThickness,barrelDepth],center=true);
@@ -41,10 +45,33 @@ module plugBarrel() {
 union() {
 	bracket();
 	difference() {
-		plugBox();
+		plugBoxRound();
 		plugBarrel();
 	}
 	 bump();
 }
 
+//translate(v=[0,20,plugHeight/2 +3]) cube([plugWidth,3,plugHeight],center=true);
 
+
+module roundedRect(size, radius)
+{
+	x = size[0];
+	y = size[1];
+	z = size[2];
+
+	linear_extrude(height=z) hull() {
+		// place 4 circles in the corners, with the given radius
+		translate([(-x/2)+(radius/2), (-y/2)+(radius/2), 0])
+		circle(r=radius);
+
+		translate([(x/2)-(radius/2), (-y/2)+(radius/2), 0])
+		circle(r=radius);
+
+		translate([(-x/2)+(radius/2), (y/2)-(radius/2), 0])
+		circle(r=radius);
+
+		translate([(x/2)-(radius/2), (y/2)-(radius/2), 0])
+		circle(r=radius);
+	}
+}
