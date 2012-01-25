@@ -12,12 +12,12 @@ barrelDepth=10.54;
 
 roundRadius = 5;
 
-bumpZmin = 43.8;
-bumpRadius = 1.5;
+bumpZmin = 43.73;
+bumpRadius = 1.75;
 bumpLength = 14;
 
 module bump() {
-	translate(v=[0,17.3,bumpZmin+bumpRadius]) difference() {
+	translate(v=[0,17.3,bumpZmin+bumpRadius+.15]) difference() {
 		rotate(a=[0,90,0]) cylinder(h=bumpLength,r=bumpRadius,center=true,$fn=20);
 		translate(v=[0,-bumpRadius,0]) cube([25,2*bumpRadius,2*bumpRadius],center=true);
 	}
@@ -35,8 +35,8 @@ module plugBox() {
 
 module plugBoxRound() {
 	union() {
-		translate(v=[0,26.5,0]) roundedRect([plugWidth-roundRadius,plugDepth-roundRadius,plugHeight],roundRadius,center=true,$fn=40);
-		translate(v=[0,18.5,plugHeight/2]) cube([plugWidth,roundRadius+2,plugHeight],center=true);
+		translate(v=[0,26.5,0]) roundedRect([plugWidth-roundRadius-.2,plugDepth-roundRadius,plugHeight],roundRadius,center=true,$fn=40);
+		translate(v=[0,18.5,plugHeight/2]) cube([plugWidth-.2,roundRadius+2,plugHeight],center=true);
 	}
 }
 
